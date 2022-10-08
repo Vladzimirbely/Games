@@ -1,0 +1,94 @@
+html {
+    height: 100%;
+    font-size: 10px;
+}
+
+body {
+    height: 100%;
+    font-family: 'Roboto';
+    font-size: 1.6rem;
+}
+
+.container {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(235, 199, 230);
+}
+
+.container .header-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 3rem 2rem;
+    box-sizing: border-box;
+}
+
+.skirt-cards,
+.difficulty {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-skirt,
+.dropdown-difficulty {
+    width: 150px;
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.dropdown-skirt a,
+.dropdown-difficulty a {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.skirt-cards:hover .dropdown-skirt,
+.difficulty:hover .dropdown-difficulty {
+    display: block;
+}
+
+.header-content .header-content__dropdown button,
+.header-content button,
+.dropdown-skirt,
+.dropdown-difficulty {
+    width: 150px;
+    margin-right: 1rem;
+    padding: 1rem 0;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 0;
+    text-decoration: none;
+    cursor: pointer;
+    color: #ffffff;
+    background: linear-gradient(to right, rgb(73, 231, 67), #23a875);
+}
+
+.dropdown-skirt a:hover,
+.dropdown-difficulty a:hover,
+.header-content button:hover {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.description-game {
+    margin: 2rem 2rem;
+    padding: 2rem 2rem;
+    box-sizing: border-box;
+    background: linear-gradient(to right, rgb(183, 246, 248),rgb(119, 210, 226));
+}
+
+.description-game .description-game__instruction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.description-game .description-game__points li {
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+}
+
