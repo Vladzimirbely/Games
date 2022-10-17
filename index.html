@@ -10,6 +10,10 @@
     <title>Document</title>
 </head>
 <body>
+
+    
+
+
     <div class="container">
         <header class="header-content">
             <div class="header-content__dropdown">
@@ -17,21 +21,31 @@
                     <button class="btn-skirt-cards">Skirt Cards</button>
                     <div class="dropdown-skirt">
                         <span class="football">
-                            <img src="./images/football.png" alt="football">
+                            <img src="./images/football.png" data-value="football" alt="football">
                         </span>
                         <span class="flags">
-                            <img src="./images/flags.png" alt="flags">
+                            <img src="./images/flags.png" data-value="flags" alt="flags">
                         </span>
                     </div>
                 </div>
                 <div class="difficulty">
                     <button class="btn-difficulty-cards">Game Difficulty</button>
                     <div class="dropdown-difficulty">
-                        <span class="low">Low (3 x 4)</span>
+                        <span class="low" data-value="low">Low (3 x 2)</span>
+                        <span class="medium" data-value="medium">Medium (4 x 3)</span>
+                        <span class="hard" data-value="hard">Hard (6 x 3)</span>
                     </div>
                 </div>
             </div>
+            <div class="timer">
+                <p class="clock"></p>
+                <p>:</p>
+                <p class="min"></p>
+                <p>:</p>
+                <p class="sec">0</p>
+            </div>
             <button class="new-game">New Game</button>
+            <button class="stop-game">Stop Game</button>
         </header>
         <div class="description-game">
             <div class="description-game__instruction">
@@ -51,7 +65,11 @@
                 </ol>
             </div>
         </div>
-        <div class="game">
+
+        <div class="board"></div>
+
+
+        <!-- <div class="game">
             <div class="game-cards">
                 <div class="cards">
                     <img src="./images/football.png" class="cards-cover" alt="football">
@@ -102,8 +120,13 @@
                     <img src="./images/mancity.png" class="cards-content" alt="mancity">
                 </div>
         </div>
-        </div>
+        </div> -->
     </div>
+    <!-- <div class="cards-in-game">
+        <div class="front"><img src="./images/football.png" alt=""></div>
+        <div class="back"></div>
+    </div> -->
+
     <script src="./js/main.js"></script>
 </body>
 </html>
