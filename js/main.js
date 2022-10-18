@@ -18,23 +18,8 @@ difficultyBtn.addEventListener('click', ({ target}) => {
     difficulty = value;
 });
 
-// const newGame = document.querySelector('.new-game');
-// const gameCards = document.querySelector('.game');
+
 const descriptionGame = document.querySelector('.description-game');
-
-// newGame.addEventListener('click', function(e) {
-//     descriptionGame.style.display = 'none';
-//     gameCards.style.display = 'flex';
-// });
-
-// const cards = document.querySelectorAll('.cards');
-// const cardCover = document.querySelector('.cards-cover');
-// const cardContent = document.querySelector('.cards-content');
-
-// cards.forEach((card) => card.addEventListener('click', function(e) {
-//     cardCover.style.display = 'none';
-//     cardContent.style.display = 'flex';
-// }));
 
 const DIFFICULTY = {
     low: 'low',
@@ -46,10 +31,6 @@ const BOARD = {
     low: [3, 2],
     medium: [4, 3],
     hard: [6, 3]
-}
-
-const SKIRT_BACK = {
-    back: ['football', 'football', 'football', 'football', 'football', 'football', 'football', 'football', 'football']
 }
 
 const SKIRT = {
@@ -66,25 +47,28 @@ const btnDrpdwnHeader = document.querySelector('.header-content__dropdown')
 newGameBtn.addEventListener('click', () => startGame());
 stopGameBtn.addEventListener('click', () => stopGame());
 
+let interval;
+const timer = document.querySelector('.timer');
+
 let targetCard = null;
 
-board.addEventListener('click', ({ target }) => {
-    let curr = target;
+// board.addEventListener('click', ({ target }) => {
+//     let curr = target;
 
-    while (curr.tagName !== 'IMG') {
-        curr = curr.parentNode;
-    }
+//     while (curr.tagName !== 'IMG') {
+//         curr = curr.parentNode;
+//     }
 
-    if (!targetCard) targetCard = curr;
-    else {
-        if (targetCard.src === curr.src && targetCard !== curr) {
-            targetCard.hidden = true;
-            curr.hidden = true;
-        } 
+//     if (!targetCard) targetCard = curr;
+//     else {
+//         if (targetCard.src === curr.src && targetCard !== curr) {
+//             targetCard.hidden = true;
+//             curr.hidden = true;
+//         } 
     
-        targetCard = null;
-    }
-})
+//         targetCard = null;
+//     }
+// })
 
 function startGame() {
     buildBoard(skirt, difficulty);
@@ -93,6 +77,8 @@ function startGame() {
     btnDrpdwnHeader.style.visibility = 'hidden';
     newGameBtn.style.display = 'none';
     stopGameBtn.style.display = 'block';
+    addTimer();
+    timer.style.display = 'flex';
 } 
 
 function stopGame() {
@@ -100,6 +86,8 @@ function stopGame() {
     newGameBtn.style.display = 'block';
     stopGameBtn.style.display = 'none';
     board.innerHTML = '';
+    clearInterval(interval);
+    timer.style.display = 'none';
 }
 
 function buildBoard() {
@@ -117,6 +105,54 @@ function buildBoard() {
     }
 
     rows.forEach(item => board.append(item));
+
+    const openCard = document.querySelectorAll('.card');
+
+    let hasFlippedCard = false;
+    let firstCard;
+    let secondCard;
+    let lockBoard = false;
+  
+    function flipCard() {
+        if (lockBoard) return;
+        this.classList.add('flip');
+  
+        if (!hasFlippedCard) {
+            hasFlippedCard = true;
+            firstCard = this;
+            return;
+        }
+    
+        secondCard = this;
+        hasFlippedCard = false;
+    
+        checkForMatch();
+   }
+  
+   function checkForMatch() {
+        let isMatch = firstCard.dataset.value === secondCard.dataset.value;
+        isMatch ? disableCards() : unflipCards();
+   }
+   
+   function disableCards() {
+        setTimeout(() => {
+            firstCard.style.visibility = 'hidden';
+            secondCard.style.visibility = 'hidden';
+        }, 500);
+   }
+  
+  function unflipCards() {
+    lockBoard = true;
+
+    setTimeout(() => {
+        firstCard.classList.remove('flip');
+        secondCard.classList.remove('flip');
+
+        lockBoard = false;
+    }, 500);
+  }
+    
+    openCard.forEach(card => card.addEventListener('click', flipCard));
 }
 
 function shuffleCards() {
@@ -139,6 +175,7 @@ function createRow(colCount) {
 function createCard(path) {
     const wrapper = document.createElement('div');
     wrapper.classList.add('card');
+    wrapper.dataset.value = path;
 
     const frontCard = document.createElement('div');
     frontCard.classList.add('front');
@@ -146,17 +183,39 @@ function createCard(path) {
     const backCard = document.createElement('div');
     backCard.classList.add('back');
 
-    const imgFront = document.createElement('img');
-    imgFront.src = `../images/football.png`;
-
     const imgBack = document.createElement('img');
     imgBack.src = `../images/${path}.png`;
     
-    frontCard.append(imgFront);
     backCard.append(imgBack);
     wrapper.append(frontCard);
     wrapper.append(backCard);
     return wrapper;
 }
 
-   
+function addTimer() {
+    let clock = document.querySelector('.clock');
+    let min = document.querySelector('.min');
+    let sec = document.querySelector('.sec');
+
+    let null_clock = 0;
+    let null_min = 0;
+    let null_sec = 0;
+
+    interval = setInterval(() => {
+        clock.innerHTML = null_clock;
+        min.innerHTML = null_min;
+        sec.innerHTML = null_sec;
+        null_sec++;
+
+        if (null_sec >= 60) {
+            null_min++;
+            null_sec = 0;
+        } else if (null_min >= 60) {
+            null_clock++;
+            null_min = 0;
+        } else if (null_clock >= 60) {
+            null_clock = 0;
+        }
+
+    }, 1000);
+}
