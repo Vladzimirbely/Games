@@ -99,6 +99,7 @@ function buildBoard() {
   
     function flipCard() {
         if (lockBoard) return;
+        if (this === firstCard) return;
         this.classList.add('flip');
   
         if (!hasFlippedCard) {
@@ -108,7 +109,6 @@ function buildBoard() {
         }
     
         secondCard = this;
-        hasFlippedCard = false;
     
         checkForMatch();
         gameFinished();
@@ -123,10 +123,17 @@ function buildBoard() {
         setTimeout(() => {
             firstCard.style.visibility = 'hidden';
             secondCard.style.visibility = 'hidden';
-            firstCard.classList.add('remove')
-            secondCard.classList.add('remove')
+            firstCard.classList.add('remove');
+            secondCard.classList.add('remove');
+
+            resetBoard();
         }, 500);
     }
+
+    function resetBoard() {
+        [hasFlippedCard, lockBoard] = [false, false];
+        [firstCard, secondCard] = [null, null];
+      }
     
     function gameFinished() {
         
@@ -146,7 +153,7 @@ function buildBoard() {
             firstCard.classList.remove('flip');
             secondCard.classList.remove('flip');
 
-            lockBoard = false;
+            resetBoard();
         }, 500);
     }
         
