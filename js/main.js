@@ -34,7 +34,8 @@ const BOARD = {
 }
 
 const SKIRT = {
-    football: ['arsenal', 'barcelona', 'juventus', 'liverpool', 'inter', 'chelsea', 'everton', 'westham', 'psg']
+    football: ['arsenal', 'barcelona', 'juventus', 'liverpool', 'inter', 'chelsea', 'everton', 'westham', 'psg'],
+    flags: ['spain', 'germany', 'costa-rica', 'india', 'argentina', 'sa', 'latvia', 'norway', 'kiribati']
 }
 
 let currentCards;
@@ -52,24 +53,6 @@ const timer = document.querySelector('.timer');
 
 let targetCard = null;
 
-// board.addEventListener('click', ({ target }) => {
-//     let curr = target;
-
-//     while (curr.tagName !== 'IMG') {
-//         curr = curr.parentNode;
-//     }
-
-//     if (!targetCard) targetCard = curr;
-//     else {
-//         if (targetCard.src === curr.src && targetCard !== curr) {
-//             targetCard.hidden = true;
-//             curr.hidden = true;
-//         } 
-    
-//         targetCard = null;
-//     }
-// })
-
 function startGame() {
     buildBoard(skirt, difficulty);
 
@@ -83,6 +66,7 @@ function startGame() {
 
 function stopGame() {
     btnDrpdwnHeader.style.visibility = 'visible';
+    descriptionGame.style.display = 'block';
     newGameBtn.style.display = 'block';
     stopGameBtn.style.display = 'none';
     board.innerHTML = '';
@@ -127,31 +111,45 @@ function buildBoard() {
         hasFlippedCard = false;
     
         checkForMatch();
-   }
+        gameFinished();
+    }
   
-   function checkForMatch() {
+    function checkForMatch() {
         let isMatch = firstCard.dataset.value === secondCard.dataset.value;
         isMatch ? disableCards() : unflipCards();
-   }
+    }
    
-   function disableCards() {
+    function disableCards() {
         setTimeout(() => {
             firstCard.style.visibility = 'hidden';
             secondCard.style.visibility = 'hidden';
+            firstCard.classList.add('remove')
+            secondCard.classList.add('remove')
         }, 500);
-   }
-  
-  function unflipCards() {
-    lockBoard = true;
-
-    setTimeout(() => {
-        firstCard.classList.remove('flip');
-        secondCard.classList.remove('flip');
-
-        lockBoard = false;
-    }, 500);
-  }
+    }
     
+    function gameFinished() {
+        
+        let removeCards = Array.from(document.querySelectorAll('.remove'))
+        
+        if (totalAmount === removeCards.length + 2) {
+            board.innerHTML = 'Congratulations! You are the winner of the game! If you want to try again click button "New Game"'
+
+            clearInterval(interval);
+        }
+    }
+  
+    function unflipCards() {
+        lockBoard = true;
+
+        setTimeout(() => {
+            firstCard.classList.remove('flip');
+            secondCard.classList.remove('flip');
+
+            lockBoard = false;
+        }, 500);
+    }
+        
     openCard.forEach(card => card.addEventListener('click', flipCard));
 }
 
@@ -216,6 +214,5 @@ function addTimer() {
         } else if (null_clock >= 60) {
             null_clock = 0;
         }
-
     }, 1000);
 }
