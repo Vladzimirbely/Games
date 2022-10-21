@@ -18,7 +18,6 @@ difficultyBtn.addEventListener('click', ({ target}) => {
     difficulty = value;
 });
 
-
 const descriptionGame = document.querySelector('.description-game');
 
 const DIFFICULTY = {
@@ -43,7 +42,7 @@ let currentCards;
 const newGameBtn = document.querySelector('.new-game');
 const board = document.querySelector('.board');
 const stopGameBtn = document.querySelector('.stop-game');
-const btnDrpdwnHeader = document.querySelector('.header-content__dropdown')
+const btnDrpdwnHeader = document.querySelector('.header-content__dropdown');
 
 newGameBtn.addEventListener('click', () => startGame());
 stopGameBtn.addEventListener('click', () => stopGame());
@@ -137,10 +136,10 @@ function buildBoard() {
     
     function gameFinished() {
         
-        let removeCards = Array.from(document.querySelectorAll('.remove'))
+        let removeCards = Array.from(document.querySelectorAll('.remove'));
         
         if (totalAmount === removeCards.length + 2) {
-            board.innerHTML = 'Congratulations! You are the winner of the game! If you want to try again click button "New Game"'
+            board.innerHTML = 'Congratulations! You are the winner of the game! If you want to try again click button "New Game"';
 
             clearInterval(interval);
         }
