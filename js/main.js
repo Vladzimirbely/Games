@@ -188,7 +188,7 @@ function createCard(path) {
     backCard.classList.add('back');
 
     const imgBack = document.createElement('img');
-    imgBack.src = `../images/${path}.png`;
+    imgBack.src = `../../images/${path}.png`
     
     backCard.append(imgBack);
     wrapper.append(frontCard);
