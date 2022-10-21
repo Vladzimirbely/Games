@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./styles/normalize.css" rel="stylesheet">
+    <link href="./styles/fonts.css" rel="stylesheet">
+    <link href="./styles/styles.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <header class="header-content">
+            <div class="header-content__dropdown">
+                <div class="skirt-cards">
+                    <button class="btn-skirt-cards">Skirt Cards</button>
+                    <div class="dropdown-skirt">
+                        <span class="football">
+                            <img src="./images/football.png" data-value="football" alt="football">
+                        </span>
+                        <span class="flags">
+                            <img src="./images/flags.png" data-value="flags" alt="flags">
+                        </span>
+                    </div>
+                </div>
+                <div class="difficulty">
+                    <button class="btn-difficulty-cards">Game Difficulty</button>
+                    <div class="dropdown-difficulty">
+                        <span class="low" data-value="low">Low (3 x 2)</span>
+                        <span class="medium" data-value="medium">Medium (4 x 3)</span>
+                        <span class="hard" data-value="hard">Hard (6 x 3)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timer">
+                <span class="clock"></span>
+                <span>:</span>
+                <span class="min"></span>
+                <span>:</span>
+                <span class="sec"></span>
+            </div>
+            <button class="new-game">New Game</button>
+            <button class="stop-game">Stop Game</button>
+        </header>
+        <div class="description-game">
+            <div class="description-game__instruction">
+                <h2>Welcome! Glad to see you in the game</h2>
+                <h2>How to play:</h2>
+                <span>Memory is a counter game where the object is to find pairs.</span>
+                <span>When the game begins, all pictures are hidden.</span>
+                <h2>To Play:</h2>
+            </div>
+            <div class="description-game__points">
+                <ol>
+                    <li>Select two cards to try to match the pictures.</li>
+                    <li>If you match the pictures you can go again.</li>
+                    <li>If they don't match it is the computer turns them.</li>
+                    <li>The player that finds all pairs wins.</li>
+                    <li>Have Fun!</li>
+                </ol>
+            </div>
+        </div>
+        <div class="board">
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
+</html>
